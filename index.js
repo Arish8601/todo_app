@@ -1,21 +1,17 @@
 const express = require('express');
+const mongoose = require('mongoose');
+const userRoutes = require('./routes/userRoutes')
+const port = 3001;
 const app = express();
+app.use(express.json()); // For sending data through the body
 
-app.get('/', (req, res) => {
-    let obj = {
-        id: 1,
-        name: "Arish",
-        age: 17
-    }
-    res.send(obj);
+app.use('/user', userRoutes);
+
+// Connect to MongoDB and start the server
+mongoose.connect('mongodb://localhost:27017/crudapp')
+    .then(() => console.log("MongoDB connected successfully:)"))
+    .catch(error => console.log(error));
+
+app.listen(port, () => {
+    console.log(`Server is running on ${port}`);
 });
-
-app.get('/about', (req, res) => {
-    res.send('Hello, this is About Page');
-});
-
-const PORT = 4000;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
-
