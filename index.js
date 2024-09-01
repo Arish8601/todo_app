@@ -1,17 +1,23 @@
-const express = require('express');
 const mongoose = require('mongoose');
-const userRoutes = require('./routes/userRoutes')
-const port = 3001;
+const express = require('express');
 const app = express();
-app.use(express.json()); // For sending data through the body
 
-app.use('/user', userRoutes);
+const userRoute = require('./routes/userRoutes');
+const todoRoutes = require('./routes/todoRoutes');
 
-// Connect to MongoDB and start the server
-mongoose.connect('mongodb://localhost:27017/crudapp')
-    .then(() => console.log("MongoDB connected successfully:)"))
+const port = 3000;
+app.use(express.json()); //Get or access data through body
+
+// Use the routes
+app.use('/user', userRoute);
+app.use('/todos', todoRoutes);
+
+mongoose.connect('mongodb://localhost:27017/todoapp')
+    .then(() => console.log("Mongodb connected successfully"))
     .catch(error => console.log(error));
 
 app.listen(port, () => {
-    console.log(`Server is running on ${port}`);
+    console.log(`Server running on port ${port}`);
 });
+
+

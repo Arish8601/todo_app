@@ -1,6 +1,6 @@
 const Usermodel = require('../../model/userModel');
 const jwt = require('jsonwebtoken')
-const secret = "mysecret"
+const secret = "mysecret";
 
 // Login API
 const login = async (req, res) => {
@@ -8,7 +8,7 @@ const login = async (req, res) => {
         const {email, password} = req.body;
 
         // Check if both email and password are provided
-        if (!email || !password) {
+        if (!email||!password) {
             return res.json({
                 msg: "Missing parameter",
                 status: false
@@ -16,7 +16,7 @@ const login = async (req, res) => {
         }
 
         // Find the user through email and password
-        const user = await Usermodel.findOne({ email: email });
+        const user = await Usermodel.findOne({email});
 
         // If the user is not foundand pass... not macth
         if (!user) {
@@ -31,11 +31,11 @@ const login = async (req, res) => {
                 status: false
             });
         }
-        let payload = {
+        let users = {
             email: user.email
         }
-        const token = await jwt.sign(payload, secret);
-         // If the email and password match, return succes............
+        const token = await jwt.sign(users, secret, { expiresIn: '1m' });
+         // If the email and password match, return succes.....
         return res.json({
             msg: "Login successful",
             status: true,
