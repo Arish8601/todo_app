@@ -15,10 +15,10 @@ const login = async (req, res) => {
             });
         }
 
-        // Find the user through email and password
+        // Find the user through email
         const user = await Usermodel.findOne({email});
 
-        // If the user is not foundand pass... not macth
+        // If the user is not found and password not macth
         if (!user) {
             return res.json({
                 msg: "User not registered",
@@ -34,7 +34,8 @@ const login = async (req, res) => {
         let users = {
             email: user.email
         }
-        const token = await jwt.sign(users, secret, { expiresIn: '1m' });
+         // Create a token for the user
+        const token = await jwt.sign(users, secret, {expiresIn: '1h'});
          // If the email and password match, return succes.....
         return res.json({
             msg: "Login successful",

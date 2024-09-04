@@ -15,17 +15,12 @@ const updateTodo = async (req, res) => {
             const updatedtodo = await Todomodel.findOneAndUpdate(
              {title: req.body.title}, {$set:{description: req.body.description}}, {new: true});
             
-                return res.json({
-                    msg: "todo updated",
-                    status: true,
-                    data: updatedtodo
-                });
-            }
             return res.json({
                 msg: "todo not found",
                 status: false,
             });
-
+        }
+         
 
     } catch (err) {
         console.log(err);

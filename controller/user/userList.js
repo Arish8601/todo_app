@@ -6,7 +6,8 @@ const allUser = async (req, res) => {
     try {
         // Get list of all users from the database
         
-        const list = await Usermodel.find({age:{$lt:25}});
+        //const list = await Usermodel.find({age:{$lt:25}});
+        
 
          // Check if users exist
            if (list.length === 0) {

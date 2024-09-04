@@ -1,11 +1,12 @@
 const Todomodel = require('../../model/todoModel');
 
 
-const newAddTodo = async (req, res) => {
+const updateduser = async (req, res) => {
     try {
-        if (!req.body.email) {
+        const email = req.user.email;
+        if (!email) {
             return res.json({
-                msg: "Missing fields",
+                msg: "Email not found",
                 status: false
             });
         }
@@ -15,11 +16,11 @@ const newAddTodo = async (req, res) => {
                 return res.json({
                     msg: "email already exists",
                     status: true,
-                    data: updatedTodo
+                    data: existingTodo
                 });
             }
         const Todo = await new Todomodel({
-            email: req.body.email,
+            email: req.user.email,
             title: req.body.title,
             description: req.body.description
         });
@@ -40,4 +41,4 @@ const newAddTodo = async (req, res) => {
     }
 };
 
-module.exports = newAddTodo;
+module.exports = updateduser;
