@@ -33,5 +33,12 @@ const allUser = async (req, res) => {
       };
     }
 
-module.exports = allUser;
+//module.exports = allUser;
+
+// userList.js
+module.exports = (req, res) => {
+
+    res.send('User list');
+};
+
 

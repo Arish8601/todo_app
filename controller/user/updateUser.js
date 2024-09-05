@@ -1,57 +1,54 @@
-const Usermodel = require('../../model/todoModel');
+const  Usermodel = require('../../model/userModel'); 
 
-const updateUser = async (req, res) => {
+const updatedUser = async(req, res)=>{
     try {
         const email = req.user.email;
-        if (!email) {
+        if (!email){
             return res.json({
-                msg: "Email not found",
+                msg: "Missing email",
                 status: false
             });
-          }
+        }
+        const existingUser = await Usermodel.findOne({email:req.user.email});
 
-        const existingUser = await  Usermodel.findOne({email});
-        if (existingUser){
+        if (existingUser) {
+            const updatedUser = await Usermodel.findOneAndUpdate(
+                {email:req.user.email}, 
+                {$set:{
+                    name:req.body.name,
+                    age:req.body.age,
+                    password:req.body.password,
+                    gender:req.body.gender 
+                }}, 
+                {new: true} 
+            );
             return res.json({
-                msg: "email already exists",
+                msg: "User's detail updated successfully",
                 status: true,
-                data: existingTodo
+                user: updatedUser
+            });
+        } else {
+            return res.json({
+                msg: "User not found",
+                status: false
             });
         }
-        if (existingUser){
-            const updateduser = await Usermodel.findOneAndUpdate(
-                {email: req.user.email }, {$set:{
-                    name: req.body.name, 
-                    age: req.body.age, 
-                    password: req.body.password,
-                    gender: req.body.gender
-                
-                  }
-                },
-                {new: true} 
-              );
-              
-            
-                return res.json({
-                    msg: "user updated",
-                    status: true,
-                    data: updateduser
-                });
-            }
-
-            return res.json({
-                msg: "user not found",
-                status: false,
-            });
-
 
     } catch (err) {
         console.log(err);
-        res.json({
+        return res.json({
             msg: err.message,
             status: false
         });
     }
 };
 
-module.exports = updateUser;
+module.exports = updatedUser;
+
+
+
+
+
+
+
+

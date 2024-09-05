@@ -1,5 +1,5 @@
 const Usermodel = require('../../model/userModel');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
 const secret = "mysecret";
 
 // Login API
@@ -54,4 +54,12 @@ const login = async (req, res) => {
 };
 
 module.exports = login;
+
+// login.js
+/*module.exports = (req, res) => {
+    // Logic for user login
+    res.send('User logged in');
+};
+*/
+
 

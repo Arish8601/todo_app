@@ -2,7 +2,7 @@
 
 const updatePassword = async (req, res) => {
     try {
-        if (!req.user.email||!req.body.password){
+        if (!req.body.email||!req.body.password){
             return res.json({
                 msg: "Missing email or password",
                 status: false
@@ -12,7 +12,7 @@ const updatePassword = async (req, res) => {
 
         if (existingUser) {
             const updatedUser = await UserModel.findOneAndUpdate(
-                {email: req.user.email}, 
+                {email: req.body.email}, 
                 {$set:{password: req.body.password}}, 
                 {new: true}
             );
@@ -37,4 +37,10 @@ const updatePassword = async (req, res) => {
     }
 };
 
-module.exports = updatePassword;
+//module.exports = updatePassword;
+module.exports = (req, res) => {
+    res.send("User's password updated");
+};
+
+
+
