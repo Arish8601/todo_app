@@ -7,11 +7,13 @@ const auth = require('../middleWare/authentication');
 const updatetodo = require('../controller/todos/updatetodo');
 const deletetodo= require('../controller/todos/deleteTodo');
 const todolist = require('../controller/todos/todolist');
+const statusUpdated = require('../controller/todos/statusUpdate');
 
 
-router.post("/todoadd", auth, todoadd);
-//router.post("/todoadd", todoadd);
+//router.post("/todoadd", auth, todoadd);
+router.post("/todoadd", todoadd);
 router.get("/todolist", todolist);
+router.post("/statusUpdate", statusUpdated);
 
 router.get('/tododetails', tododetail);
 router.delete("/tododelete", deletetodo);

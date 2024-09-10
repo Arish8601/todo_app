@@ -9,15 +9,15 @@ const updateTodo = async (req, res) => {
                 status: false
             });
         }
-        const existingTodo = await Todomodel.findOne({title: req.body.title});
+        const existingstatus = await Todomodel.findOne({title: req.body.title});
 
-        if (existingTodo){
-            const updatedtodo = await Todomodel.findOneAndUpdate(
+        if (existingstatus){
+            const updatedTodo = await Todomodel.findOneAndUpdate(
              {title: req.body.title}, {$set:{description: req.body.description}}, {new: true});
-            
-            return res.json({
-                msg: "todo not found",
-                status: false,
+             return res.json({
+                msg: "Todo status updated successfully",
+                status: true,
+                data: updatedTodo
             });
         }
          

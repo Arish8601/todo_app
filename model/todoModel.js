@@ -4,6 +4,7 @@ const todoSchema = new mongoose.Schema({
     email: String,
     title: String,
     description: String,
+    status:{type:String, enum: ["pending", "completed"], default: "pending"},
     createdAt: Number,
     updatedAt: Number
 }, {timestamps: true});
@@ -11,3 +12,5 @@ const todoSchema = new mongoose.Schema({
 const models = mongoose.model("todos", todoSchema);
 
 module.exports = models;
+
+

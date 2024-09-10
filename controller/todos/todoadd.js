@@ -3,7 +3,7 @@ const Todomodel = require('../../model/todoModel');
 
 const updateduser = async (req, res) => {
     try {
-        const email = req.user.email;
+        const email = req.body.email;
         if (!email) {
             return res.json({
                 msg: "Email not found",
@@ -20,7 +20,7 @@ const updateduser = async (req, res) => {
                 });
             }
         const Todo = await new Todomodel({
-            email: req.user.email,
+            email: req.body.email,
             title: req.body.title,
             description: req.body.description
         });
