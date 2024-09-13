@@ -1,10 +1,11 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 // Define User Schema
 const todoSchema = new mongoose.Schema({
     email: String,
     title: String,
     description: String,
-    status:{type:String, enum: ["pending", "completed"], default: "pending"},
+    status:{type:String, enum: ["pending", "completed"], default: "pending"}, //default: "pending"
+    //status:{type:String, default: "pending"},
     createdAt: Number,
     updatedAt: Number
 }, {timestamps: true});

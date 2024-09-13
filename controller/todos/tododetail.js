@@ -1,18 +1,11 @@
 const Todomodel = require('../../model/todoModel');
 
 const tododetail = async (req, res) => {
-    try {token
-        const email = req.query.email;
-        if(!email){
+    try {
+        const title = req.body.title;
+        if(!title){
             return res.json({
-                msg: "email is missing",
-                status: false
-            });
-        }
-        const title = req.query.title;
-            if (!title) {
-            return res.json({
-                msg: "Title parameter is missing",
+                msg: "title is missing",
                 status: false
             });
         }

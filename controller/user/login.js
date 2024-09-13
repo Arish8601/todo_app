@@ -38,7 +38,7 @@ const login = async (req, res) => {
         const token = await jwt.sign(users, secret, {expiresIn: '1h'});
          // If the email and password match, return succes.....
         return res.json({
-            msg: "Login successful",
+            msg: "Login successfully",
             status: true,
             data: user,
             token
@@ -55,11 +55,5 @@ const login = async (req, res) => {
 
 module.exports = login;
 
-// login.js
-/*module.exports = (req, res) => {
-    // Logic for user login
-    res.send('User logged in');
-};
-*/
 
 

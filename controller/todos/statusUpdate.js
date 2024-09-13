@@ -2,24 +2,33 @@ const Todomodel = require('../../model/todoModel');
 
 const updatedstatus = async (req, res) => {
     try {
-        const {title} = req.body;
+        const token = req.user.email;
         
-        if (!title){
+        if (!token){
             return res.json({
-                msg: "Missing fields",
-                status: false
+             msg: "Missing fields",
+             status: false
             });
         }
-        const stts = req.body.status||"pending"
+       /* const stts = req.body.status||"pending"
+         if(stts !== "pending" && stts !== "completed"){
+            return res.json({
+                msg: "invalid status value",
+                status: false
+               });
+         }
         const updateStatus = await Todomodel.findOneAndUpdate(
-            {title: title}, {$set: {status: stts}}, {new: true});
+            {title: req.body.title}, {$set: {status: stts}}, {new: true});
+    */
 
+     const updateStatus = await Todomodel.findOneAndUpdate(
+        {title: req.body.title}, {$set: {status: "completed"}}, {new: true});
         if (!updateStatus) {
             return res.json({
-                msg: "Todo not found",
-                status: false
+             msg: "Todo not found",
+             status: false
             });
-        }
+       }
 
         return res.json({
             msg: "Todo status updated successfully",
