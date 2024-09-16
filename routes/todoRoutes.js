@@ -16,7 +16,7 @@ router.post("/statusUpdate", auth, statusUpdated);
 
 router.get('/tododetails', auth, tododetail);
 router.delete("/tododelete", auth, deletetodo);
-router.delete("/updateTodo", auth, updatetodo);
+router.post("/updateTodo", auth, updatetodo);
 
 
 

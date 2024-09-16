@@ -4,10 +4,10 @@ const todoSchema = new mongoose.Schema({
     email: String,
     title: String,
     description: String,
-    status:{type:String, enum: ["pending", "completed"], default: "pending"}, //default: "pending"
+    status:{type:String, enum: ["pending", "completed"]},
     //status:{type:String, default: "pending"},
     createdAt: Number,
-    updatedAt: Number
+    updatedAt: Number,
 }, {timestamps: true});
 
 const models = mongoose.model("todos", todoSchema);
@@ -15,3 +15,4 @@ const models = mongoose.model("todos", todoSchema);
 module.exports = models;
 
 
+ //...todo.toObject()

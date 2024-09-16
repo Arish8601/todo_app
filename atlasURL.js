@@ -121,5 +121,32 @@ const addtodo = async(req, res) =>{
     module.exports = addtodo;
     */
 
+    // todoController.js
+const Todo = require('./todoModel');
+
+// Function to capitalize the description
+const capitalizeDescription = (description) => {
+  return description.split(' ').map(word => word.toUpperCase()).join(' ');
+};
+
+// Function to create a new todo
+const createTodo = async (req, res) => {
+  try {
+    let { description } = req.body;
+    
+    // Capitalize the description
+    description = capitalizeDescription(description);
+
+    const newTodo = new Todo({ description });
+    await newTodo.save();
+
+    res.status(201).json({ message: 'Todo created successfully', todo: newTodo });
+  } catch (error) {
+    res.status(500).json({ message: 'Error creating todo', error: error.message });
+  }
+};
+
+module.exports = { createTodo };
+
            
 

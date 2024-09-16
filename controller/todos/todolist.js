@@ -15,16 +15,32 @@ const Todolist= async (req, res) => {
             status: false
         });
     }
+
     try{
-        const todos = await Todomodel.find({status});
-         return res.json({
+        const todos = await Todomodel.find({status});    
+
+        /*const arr = [];
+        todos.forEach(todo =>{
+          const capDesc = {id:todo.id, email:todo.email, title:todo.title, description: todo.description.toUpperCase(), 
+            status:todo.status}
+          arr.push(capDesc)
+        });
+        */
+        const arr = todos.map(todo =>{
+             return {id:todo.id, email:todo.email, title:todo.title, 
+                description: todo.description.toUpperCase(), 
+              status:todo.status}
+    });
+    
+             
+          return res.json({
             msg: "Todo list get successfully by the status",
             status: true,
-            data: todos
+            data: arr
         });
     } catch (err) {
         console.log(err);
-        return res.json({
+        return res.json({msg:"Todo list not able to fetch", status: false
         });
     }
 };
