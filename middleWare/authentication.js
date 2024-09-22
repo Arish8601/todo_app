@@ -22,6 +22,7 @@ const auth = (req, res, next) => {
         req.user = verify;
         next();
         
+        
     } catch (err) {
         console.log(err)
         return res.json({

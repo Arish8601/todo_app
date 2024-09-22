@@ -1,11 +1,11 @@
  const Todomodel = require('../../model/todoModel');
 
- const addtodo = async (req, res) => {
+ const addtodo = async (req, res) =>{
     try {
         const title = req.body.title;
-        if (!title) {
+        if (!title){
              return res.json({
-             msg: "title not found",
+             msg:"title not found",
              status: false
             });
         }
@@ -18,10 +18,12 @@ const existingTodo = await Todomodel.findOne({title});
          data: existingTodo
      });
     }
+
+
 const Todo = await new Todomodel({
     email:  req.user.email,
     title: req.body.title,
-    description: req.body.description
+    description: req.body.description,
  });
    
      await Todo.save();
@@ -41,6 +43,3 @@ const Todo = await new Todomodel({
 };
  module.exports = addtodo;
    
-   
-   
-

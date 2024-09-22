@@ -11,6 +11,7 @@ const registerUser = async (req, res) => {
                 status: false
             });
         }
+        
         const existingUser = await Usermodel.findOne({email});
         if (existingUser) {
             return res.json({
@@ -18,13 +19,14 @@ const registerUser = async (req, res) => {
                 status: false
             });
         }
-        const saltRound = 10;
-        const hashPassword = await bcrypt.hash(password, saltRound);
+        //const saltRound = 10;
+        //const hashPassword = await bcrypt.hash(password, saltRound);
         const newUser = await new Usermodel({
         name: req.body.username,      
         age: req.body.age,             
         email: req.body.email,         
-        password: hashPassword,   
+        //password: hashPassword,  
+        password: req.body.password, 
         gender: req.body.gender        
 });
 

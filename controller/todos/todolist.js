@@ -1,6 +1,6 @@
-const Todomodel = require('../../model/todoModel');
+/*const Todomodel = require('../../model/todoModel');
 
-const Todolist= async (req, res) => {
+const Todolist = async (req, res) => {
     const status = req.query.status;
     if(!status){
         return res.json({
@@ -8,6 +8,7 @@ const Todolist= async (req, res) => {
             status: false
         });
     }
+    
     if(status !== "pending" && status !== "completed"){
             
         return res.json({
@@ -15,26 +16,32 @@ const Todolist= async (req, res) => {
             status: false
         });
     }
+        try{
+        const todos = await Todomodel.find({status});
+        if (todos.length === 0){
+            return res.json({
+              msg: "No todos found between the provided dates",
+              status: false,
+            });
+          }    
 
-    try{
-        const todos = await Todomodel.find({status});    
-
-        /*const arr = [];
+        const arr = [];
         todos.forEach(todo =>{
           const capDesc = {id:todo.id, email:todo.email, title:todo.title, description: todo.description.toUpperCase(), 
             status:todo.status}
           arr.push(capDesc)
         });
-        */
+        
         const arr = todos.map(todo =>{
              return {id:todo.id, email:todo.email, title:todo.title, 
                 description: todo.description.toUpperCase(), 
               status:todo.status}
     });
     
+    
              
           return res.json({
-            msg: "Todo list get successfully by the status",
+            msg: "Todo list get successfully",//Todo list get successfully by the status
             status: true,
             data: arr
         });
@@ -46,6 +53,55 @@ const Todolist= async (req, res) => {
 };
 
 module.exports = Todolist;
+*/
 
+
+
+const Todomodel = require('../../model/todoModel');
+const Todolist = async (req, res)=>{
+  try{
+    const {startDate, endDate} = req.body;
+      if(startDate && endDate){
+    var todos = await Todomodel.find({
+      createdAt: {$gte: startDate, $lte: endDate},
+    });
+    return res.json({
+        msg: "List of todos fetched successfully by Date",
+        status: true,
+        data: todos, 
+      });
+    }else{
+     todos = await Todomodel.find({});
+}
+    if (todos.length === 0){
+      return res.json({
+        msg: "No todos found",
+        status: false,
+      });
+    }
+
+    /*return res.json({
+      msg: "List todos fetched successfully by Date.",
+      status: true,
+      data: todos, 
+    });
+  }
+    */ 
+   return res.json({
+    msg: "Todolist fetched successfully",
+    status: true,
+    data: todos, 
+  });
+}
+  catch (err){
+    console.log(err);
+    return res.json({
+      msg: "Unable to fetch todos",
+      status: false,
+    });
+  }
+};
+
+module.exports = Todolist;
 
 

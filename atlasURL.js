@@ -121,32 +121,140 @@ const addtodo = async(req, res) =>{
     module.exports = addtodo;
     */
 
-    // todoController.js
-const Todo = require('./todoModel');
 
-// Function to capitalize the description
-const capitalizeDescription = (description) => {
-  return description.split(' ').map(word => word.toUpperCase()).join(' ');
-};
 
-// Function to create a new todo
-const createTodo = async (req, res) => {
-  try {
-    let { description } = req.body;
+    /*const express = require('express');
+    const cloudinary = require('cloudinary').v2;
+    const { CloudinaryStorage } = require('multer-storage-cloudinary');
+    const multer = require('multer');
+    const dotenv = require('dotenv');
     
-    // Capitalize the description
-    description = capitalizeDescription(description);
+    // Load environment variables from .env file
+    dotenv.config();
+    
+    const app = express();
+    
+    // Configure Cloudinary
+    cloudinary.config({
+        cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+        api_key: process.env.CLOUDINARY_API_KEY,
+        api_secret: process.env.CLOUDINARY_API_SECRET
+    });
+    
+    // Set up Cloudinary storage for Multer
+    const storage = new CloudinaryStorage({
+        cloudinary: cloudinary,
+        params: {
+            folder: 'uploads', // Cloudinary folder name
+            allowed_formats: ['jpg', 'png'], // Allowed file formats
+        }
+    });
+    
+    const upload = multer({ storage: storage });
+    
+    app.use(express.json()); // To parse JSON request bodies
+    
+    // Test route
+    app.get('/', (req, res) => {
+        res.send('Hello World');
+    });
+    
+    // API to upload image from URL
+    app.post('/api/upload', async (req, res) => {
+        const imageUrl = req.body.imageUrl; // Get image URL from request body
+    
+        try {
+            // Upload the image using the URL
+            const result = await cloudinary.uploader.upload(imageUrl, {
+                folder: 'uploads' // Specify folder in Cloudinary
+            });
+    
+            res.json({ message: 'Uploaded successfully', data: result });
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: 'Upload failed', error: error.message });
+        }
+    });
+    
+    // Start the server
+    const port = 2000;
+    app.listen(port, () => {
+        console.log(`Server running on port ${port}`);
+    });
+    
 
-    const newTodo = new Todo({ description });
-    await newTodo.save();
+const startDate = null;
+const endDate = null;
+if(startDate){
+    startDate = new Date(start);
+}
+if(endDate){
+    const endDate = new Date(end);
+}
+if(startDate && endDate && startDate>endDate){
+    return res.json({ msg:"startDate cannot come after endDate", status: false});
+}
+*/
 
-    res.status(201).json({ message: 'Todo created successfully', todo: newTodo });
-  } catch (error) {
-    res.status(500).json({ message: 'Error creating todo', error: error.message });
-  }
+
+
+/*const Todomodel = require('../../model/todoModel');
+
+const Todolist = async (req, res) =>{
+    const status = req.query.status;
+    if(!status){
+        return res.json({
+            msg: "status not found",
+            status: false
+        });
+    }
+    
+    if(status !== "pending" && status !== "completed"){
+            
+        return res.json({
+            msg: "status is missing",
+            status: false
+        });
+    }
+        try{
+        const todos = await Todomodel.find({status});
+        if (todos.length === 0){
+            return res.json({
+              msg: "No todos found between the provided dates",
+              status: false,
+            });
+          }    
+
+        const arr = [];
+        todos.forEach(todo =>{
+          const capDesc = {id:todo.id, email:todo.email, title:todo.title, description: todo.description.toUpperCase(), 
+            status:todo.status}
+          arr.push(capDesc)
+        });
+        
+        const arr = todos.map(todo =>{
+             return {id:todo.id, email:todo.email, title:todo.title, 
+                description: todo.description.toUpperCase(), 
+              status:todo.status}
+    });
+    
+    
+             
+          return res.json({
+            msg: "Todo list get successfully",//Todo list get successfully by the status
+            status: true,
+            data: arr
+        });
+    } catch (err) {
+        console.log(err);
+        return res.json({msg:"Todo list not able to fetch", status: false
+        });
+    }
 };
 
-module.exports = { createTodo };
+module.exports = Todolist;
+*/
 
-           
+
+
 

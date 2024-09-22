@@ -5,7 +5,8 @@ const UserSchema = new mongoose.Schema({
     age: Number,
     email: String,
     password: String,
-    gender: { type: String, enum: ["Male", "Female", "Others"] },
+    gender: {type: String, enum: ["Male", "Female", "Others"]},
+    profilePic: String,
     createdAt: Number,
     updatedAt: Number
 }, {timestamps: true});
@@ -14,3 +15,13 @@ const UserSchema = new mongoose.Schema({
 const Usermodel = mongoose.model("users", UserSchema);
 
 module.exports = Usermodel;
+
+
+
+
+
+
+
+
+
+
