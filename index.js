@@ -7,13 +7,15 @@ app.use(morgan('dev'))
 
 const userRoute = require('./routes/userRoutes');
 const todoRoutes = require('./routes/todoRoutes');
+const todoCategoryRoutes = require('./routes/todoCategoryRoutes');
 
 const port = 3001;
 app.use(express.json()); //Get or access data through body
 
 // Use the routes
 app.use('/user', userRoute);
-app.use('/todos', todoRoutes); //mdarish948:oe6DR3idKt15jnJq
+app.use('/todos', todoRoutes);
+app.use('/todoCategory', todoCategoryRoutes);  //mdarish948:oe6DR3idKt15jnJq
 
 mongoose.connect('mongodb+srv://mdarish948:oe6DR3idKt15jnJq@cluster0.ardub.mongodb.net/todoapp?retryWrites=true&w=majority&appName=Cluster0')
 

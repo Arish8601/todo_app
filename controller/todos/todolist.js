@@ -57,7 +57,8 @@ module.exports = Todolist;
 
 
 
-const Todomodel = require('../../model/todoModel');
+//Date Filter
+/*const Todomodel = require('../../model/todoModel');
 const Todolist = async (req, res)=>{
   try{
     const {startDate, endDate} = req.body;
@@ -79,14 +80,6 @@ const Todolist = async (req, res)=>{
         status: false,
       });
     }
-
-    /*return res.json({
-      msg: "List todos fetched successfully by Date.",
-      status: true,
-      data: todos, 
-    });
-  }
-    */ 
    return res.json({
     msg: "Todolist fetched successfully",
     status: true,
@@ -103,5 +96,50 @@ const Todolist = async (req, res)=>{
 };
 
 module.exports = Todolist;
+*/
 
+
+//PAGINATION concept
+const todomodel = require('../../model/todoModel');
+
+const todolist = async (req, res)=>{
+try {
+  const page = req.body.page * 1 
+  const limit = req.body.limit * 1 
+  const skip = (page - 1) * limit; 
+
+  const todos = await todomodel.find({})
+     .skip(skip)
+     .limit(limit);
+
+     if (todos.length === 0){
+     return res.json({
+       msg: "No todos found",
+       status: false,
+   });
+ }
+  const totalTodos = await todomodel.countDocuments({});
+  const totalPages = parseInt(totalTodos / limit);
+   return res.json({
+    msg: "Todo list fetched successfully with pagination",
+   status: true,
+    data: todos,
+    pagination:{
+    currentPage: page,
+    totalPages: totalPages,
+    totalItems: totalTodos,
+    itemsPerPage: limit
+    }
+ });
+
+  }catch (err){
+    console.log(err);
+    return res.json({
+     msg: "Todo list not able to fetched",
+     status: false
+   });
+ }
+};
+
+module.exports = todolist;
 

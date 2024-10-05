@@ -1,8 +1,7 @@
 /*const Todomodel = require('../../model/todoModel');
 
 const removeTodo = async (req, res) => {
-         const removeTodo = async (req, res) => {
-            try {
+           try {
              if (!req.user.email) {
                  return res.json({
                      msg: "Email not found",

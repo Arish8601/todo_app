@@ -10,11 +10,15 @@ const deletetodo = require('../controller/todos/deleteTodo');
 const todolist = require('../controller/todos/todolist');
 const statusUpdated = require('../controller/todos/statusUpdate');
 const todolistDate = require('../controller/todos/todolistWithDateFilter');
-const { upload } = require('../middleWare/fileUpload')
+const { upload } = require('../middleWare/fileUpload');
 const image = require('../controller/todos/UpdateImage');
+const validateAddTodo = require('../middleWare/addTodoValidation');
 
 
-router.post("/todoadd", auth, todoadd);
+//router.post('/todoadd', auth, todoadd);
+router.post('/todoadd', auth, upload.single('profilePicture'), todoadd);
+router.post('/addTodo', validateAddTodo, upload.single('picture'), todoadd);
+
 router.post('/UpdateImage', auth, upload.single("profilePicture"), image);
 router.post("/todolistDateFilter", auth, todolistDate);
 router.get("/todolist", auth, todolist);

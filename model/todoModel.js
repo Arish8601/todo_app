@@ -1,10 +1,12 @@
-const mongoose = require('mongoose');
-// Define User Schema
+const mongoose = require('mongoose')
+
 const todoSchema = new mongoose.Schema({
     email: String,
     title: String,
     description: String,
     status:{type:String, enum: ["pending", "completed"]},
+    categoryName:{type:String, enum: ["work", "personal"]},
+    categoryId:Number,
     startDate: Number,
     endDate: Number,
     image: String,
@@ -18,4 +20,13 @@ const models = mongoose.model("todos", todoSchema);
 module.exports = models;
 
 
- //...todo.toObject()
+
+
+
+
+
+
+
+
+
+

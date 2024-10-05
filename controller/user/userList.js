@@ -7,8 +7,8 @@ const allUser = async (req, res) => {
         // Get list of all users from the database
         
         //const list = await Usermodel.find({age:{$lt:25}});
-        
-
+          
+        const list = await Usermodel.find({});
          // Check if users exist
            if (list.length === 0) {
             return res.json({
@@ -33,12 +33,6 @@ const allUser = async (req, res) => {
       };
     }
 
-//module.exports = allUser;
-
-// userList.js
-module.exports = (req, res) => {
-
-    res.send('User list');
-};
+module.exports = allUser;
 
 
