@@ -27,14 +27,14 @@ const registerUser = async (req, res) => {
         email: req.body.email,         
         //password: hashPassword,  
         password: req.body.password, 
-        gender: req.body.gender        
-});
-
-        const savedUser = await newUser.save();
+        gender: req.body.gender  
+        .save()   
+  });
+ 
         return res.json({
             msg: "User registered successfully",
             status: true,
-            data: savedUser
+            data: newUser
         });
     } catch (error) {
         console.error(error.message);

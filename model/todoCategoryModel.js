@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const TodoCategorySchema = new mongoose.Schema({
     email: String,
     description: String,
-    categoryName:{type:String, enum: ["work", "personal"]},
+    categoryName: String, //enum: ["work", "personal"]},
     categoryId: Number,
     createdAt: Number,
     updatedAt: Number,

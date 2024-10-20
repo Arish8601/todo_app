@@ -5,7 +5,7 @@ const todoSchema = new mongoose.Schema({
     title: String,
     description: String,
     status:{type:String, enum: ["pending", "completed"]},
-    categoryName:{type:String, enum: ["work", "personal"]},
+    categoryName: String,  //enum: ["work", "personal"]},
     categoryId:Number,
     startDate: Number,
     endDate: Number,

@@ -18,7 +18,7 @@ const login = async (req, res) => {
         // Find the user through email
         const user = await Usermodel.findOne({email});
 
-        // If the user is not found and password not macth
+        // If the user is not found and password not match
         if (!user) {
             return res.json({
                 msg: "User not registered",
@@ -31,11 +31,10 @@ const login = async (req, res) => {
                 status: false
             });
         }
-        let users = {
-            email: user.email
-        }
+        //Existing user ke email ke through token create kr rha h
+        let users = {email: user.email}
          // Create a token for the user
-        const token = await jwt.sign(users, secret, {expiresIn: '1h'});
+        const token = await jwt.sign(users, secret, {expiresIn: '1h'}); //users => means users ka data
          // If the email and password match, return succes.....
         return res.json({
             msg: "Login successfully",
@@ -54,6 +53,7 @@ const login = async (req, res) => {
 };
 
 module.exports = login;
+
 
 
 

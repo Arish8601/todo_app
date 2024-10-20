@@ -1,5 +1,5 @@
 const validateAddTodo = (req, res, next) => {
-    const {title, description, status, categoryName} = req.body;
+    const {title, description, status, categoryName, image} = req.body;
 
     if (!title || !description || !categoryName || !status || !image){
         return res.json({

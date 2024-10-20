@@ -50,8 +50,9 @@ const Todo = await new Todomodel({
 
 
 
- /*const Todomodel = require('../../model/todoModel');
+ const Todomodel = require('../../model/todoModel');
  const { runMiddleware, handleUpload, upload } = require('../../middleWare/fileUpload');
+ const validateTodo = require('../../middleWare/addTodoValidation');
 
 const addtodoUploadImg = async (req, res) => {
     try {
@@ -81,10 +82,14 @@ const addtodoUploadImg = async (req, res) => {
                 data: existingTodo
          });
         }
+        var categoryId = Math.floor(Math.random() * 1000000000);
         const Todo = await new Todomodel({
             email: req.user.email,
             title: req.body.title,
             description: req.body.description,
+            status: req.body.status,
+         categoryName: req.body.categoryName,
+         categoryId: categoryId,
             image: fileUrl 
         });
         await Todo.save();
@@ -104,14 +109,15 @@ const addtodoUploadImg = async (req, res) => {
 };
 
 module.exports = addtodoUploadImg;
-*/
 
 
 
-const todoModel = require('../../model/todoModel');
+
+//Todoadd DB me And Category DB me same categoryName ka user nii hona chiye and categoryId of both DB must be same
+
+/*const todoModel = require('../../model/todoModel');
 const TodoCategoryModel = require('../../model/todoCategoryModel');
 const {runMiddleware, handleUpload, upload} = require('../../middleWare/fileUpload');
-const validateTodo = require('../../middleWare/addTodoValidation');
 
 
  const addtodo = async (req, res) =>{
@@ -119,7 +125,8 @@ const validateTodo = require('../../middleWare/addTodoValidation');
         if(!req.file){
             return res.json({
                 msg: "Missing parameter",
-            })
+                status: false
+            });
         };
 
         const b64 = Buffer.from(req.file.buffer).toString("base64");
@@ -138,6 +145,7 @@ const validateTodo = require('../../middleWare/addTodoValidation');
           const existingTodo = await todoModel.findOne({email: req.user.email,
             title: req.body.title,
           });
+          
       
           if (existingTodo){
             return res.json({
@@ -175,8 +183,8 @@ const validateTodo = require('../../middleWare/addTodoValidation');
 };
 
      module.exports = addtodo;
+     */
      
      
 
-
-
+     

@@ -37,10 +37,8 @@ const updatePassword = async (req, res) => {
     }
 };
 
-//module.exports = updatePassword;
-module.exports = (req, res) => {
-    res.send("User's password updated");
-};
+module.exports = updatePassword;
+
 
 
 
